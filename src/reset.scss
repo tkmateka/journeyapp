@@ -1,0 +1,66 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@import './theme.scss';
+// ==========================================================================================================================================================================
+// Inputs container mixins
+// ==========================================================================================================================================================================
+@mixin input-reset {
+    mat-form-field {
+        width: 100%;
+    }
+    mat-error {
+        margin-top: 14px;
+        margin-left: -10px;
+    }
+    mat-label {
+        margin-top: 3px;
+        // margin-bottom: -3px;
+    }
+    label {
+        font-weight: 300;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+    .mat-form-field-infix {
+        border-top: 0 solid transparent;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: transparent;
+        border-radius: 4px;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 0.8em 0 0.5em 0;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-prefix {
+        margin-right: 5px;
+        font-size: 13px;
+        color: mat.get-color-from-palette($primary-light, 900);;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-suffix {
+        top: 0.6em;
+    }
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: .8em 0 0.8em 0;
+    }
+    .mat-form-field:not(.mat-form-field-appearance-legacy) 
+    .mat-form-field-suffix .mat-icon-button {
+        height: unset;
+    }
+}
+
+.mat-input-element {
+    color: #000000 !important;
+    font-size: 14px !important;
+}
+
+.grey-border-input-container,
+.grey-border-select-container {
+    @include input-reset;
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        border: 1px solid #4f5665;
+    }
+}

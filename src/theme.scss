@@ -1,0 +1,87 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$white: #fff;
+
+// Light Theme Pallet
+$primary-light: mat.define-palette(mat.$blue-palette);
+$accent-light: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// Dark Theme
+$primary-dark: mat.define-palette(mat.$indigo-palette);
+$accent-dark: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$warn: mat.define-palette(mat.$red-palette);
+
+$light-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $primary-light,
+            accent: $accent-light,
+            warn: $warn,
+        ),
+    )
+);
+$dark-theme: mat.define-dark-theme(
+    (
+        color: (
+            primary: $primary-dark,
+            accent: $accent-dark,
+            warn: $warn,
+        ),
+    )
+);
+
+@include mat.all-component-themes($light-theme);
+
+// =======================================================================================================================================
+// DARK MODE
+// =======================================================================================================================================
+.darkMode {
+    @include mat.all-component-colors($dark-theme);
+    .routerOutlet {
+        background-color: mat.get-color-from-palette($primary-dark, 900);
+        color: $white;
+    }
+    .primaryColor,
+    .customLink,
+    .initials {
+        color: mat.get-color-from-palette($primary-dark, 500);
+    }
+    .accentColor {
+        color: mat.get-color-from-palette($accent-dark, 500);
+    }
+    .primaryBackground,
+    *::-webkit-scrollbar-track {
+        background-color: mat.get-color-from-palette($primary-dark, 500);
+    }
+    .accentBackground,
+    *::-webkit-scrollbar-thumb:hover {
+        background-color: mat.get-color-from-palette($accent-dark, 500);
+    }
+    /* Handle on hover */
+    *::-webkit-scrollbar-thumb {
+        background: mat.get-color-from-palette($primary-dark, 100);
+    }
+    .sidenavContainer {
+        .mat-sidenav {
+            background-color: mat.get-color-from-palette($primary-dark) !important;
+        }
+        .focusedNavItem,
+        .navItem:hover {
+            cursor: pointer;
+            background-color: mat.get-color-from-palette($primary-dark, 900);
+        }
+    }
+    .spinnerContainer {
+        background-color: mat.get-color-from-palette($primary-dark, 500, 0.6);
+        .spinner {
+            color: mat.get-color-from-palette($accent-dark, 500);
+        }
+        .spinner:after {
+            color: mat.get-color-from-palette($primary-dark, 500);
+        }
+    }
+}
+// =======================================================================================================================================

@@ -1,0 +1,155 @@
+// This allows you to access the color pallet and bind to it for theme changes
+@use "sass:map";
+@use "@angular/material" as mat;
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&family=Ultra&display=swap');
+@import './theme.scss';
+@import './reset.scss';
+
+body {
+    margin: 0;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+    font-family: 'Ultra', serif;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+// Colors
+.primary {
+    color: mat.get-color-from-palette($primary-light, 500);
+}
+
+// borders
+.primary-light-bottom-border, .side-nav-item:hover {
+    border-bottom: solid 1px mat.get-color-from-palette($primary-light, 500);
+}
+.primary-light-border {
+    border: 1px solid mat.get-color-from-palette($primary-light, 500);
+}
+.accent-border {
+    border: 1px solid mat.get-color-from-palette($accent-light, 500);
+}
+
+.round {
+    border-radius: 50% !important;
+}
+
+// widths & heights
+.full-screen {
+    height: 100vh;
+}
+.full-width {
+    width: 100%;
+}
+.width-48 {
+    width: 48%;
+}
+.width-80 {
+    width: 80%;
+}
+.width-90 {
+    width: 90%;
+}
+.height-70px {
+    height: 70px;
+}
+.container-height {
+    height: calc(100% - 70px);
+    overflow-y: auto;
+}
+
+// Flex Styles
+.flex-1 {
+    flex: 1;
+}
+.flex, .mat-drawer-inner-container {
+    display: flex;
+}
+.column, .mat-drawer-inner-container {
+    flex-direction: column;
+}
+.center_center, .mat-drawer-inner-container {
+    justify-content: center;
+    align-items: center;
+}
+.space-between_center {
+    justify-content: space-between;
+    align-items: center;
+}
+.space-between_stretch {
+    justify-content: space-between;
+    align-items: stretch;
+}
+.center_stretch {
+    justify-content: center;
+    align-items: stretch;
+}
+.space-around_center {
+    justify-content: space-around;
+    align-items: center;
+}
+.space-evenly_center {
+    justify-content: space-evenly;
+    align-items: center;
+}
+.start_center {
+    justify-content: start;
+    align-items: center;
+}
+.start_stretch {
+    justify-content: start;
+    align-items: stretch;
+}
+.start_space-between {
+    justify-content: start;
+    align-items: space-between;
+}
+
+// Gaps
+.gap-1em, .mat-drawer-inner-container {
+    gap: 1em;
+}
+.gap-2em {
+    gap: 2em;
+}
+
+// fonts
+.text-center {
+    text-align: center;
+}
+.font-10 {
+    font-size: 10px;
+}
+
+// Margins & Paddings
+.no-margin {
+    margin: 0 !important;
+}
+.padding-top-2em {
+    padding-top: 2em;
+}
+
+// Global
+mat-sidenav-container {
+    mat-sidenav {
+        width: 200px;
+        .side-nav-item:hover {
+            border-bottom-width: 3px;
+        }
+    }
+}
+form {
+    border-radius: 6px;
+    padding: 1em;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

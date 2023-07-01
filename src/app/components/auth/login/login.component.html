@@ -1,0 +1,43 @@
+<form class="primary-light-border gap-1em flex column" [formGroup]="loginForm">
+    <h2 class="text-center uploadBtn no-margin">Log in to your account</h2>
+
+    <!-- row -->
+    <div class="flex column gap-1em">
+        <div class="full-width grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'"
+                [hideRequiredMarker]="false">
+                <input matInput placeholder="example@domain.com" [required]="true" type="email"
+                    formControlName="email">
+                <mat-error
+                    *ngIf="loginForm.get('email')?.hasError('pattern') && !loginForm.get('email')?.hasError('required')">
+                    Invalid email address
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="full-width grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'"
+                [hideRequiredMarker]="false">
+                <input matInput placeholder="Enter password" [required]="true" type="password"
+                    formControlName="password" autocomplete="false">
+                <mat-error
+                    *ngIf="loginForm.get('password')?.hasError('minlength') && !loginForm.get('password')?.hasError('required')">
+                    Password should be a minimum of 6 charecters
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                    Password is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- Submit area -->
+    <div class="flex center_center column">
+        <button mat-raised-button (click)="login()" color="primary" class="width-48">
+            login
+        </button>
+    </div>
+
+</form>

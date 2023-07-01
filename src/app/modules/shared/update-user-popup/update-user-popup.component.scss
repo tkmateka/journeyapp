@@ -1,0 +1,29 @@
+form {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.profile-image {
+    position: relative;
+    width: 100px;
+    height: 100px;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+
+    button {
+        position: absolute;
+        bottom: 0;
+        right: -10px;
+        width: 35px;
+        height: 35px;
+        min-width: auto;
+        padding: 0;
+        line-height: 0;
+
+        span {
+            font-size: 16px;
+        }
+    }
+}

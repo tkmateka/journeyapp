@@ -1,0 +1,32 @@
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input #input (keyup)="applyFilter(input.value)" matInput placeholder="filter" type="text">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" #table class="full-width mat-elevation-z8">
+        <ng-container *ngFor="let column of displayedColumns; let i = index" [matColumnDef]="column">
+            <th class="tableHeaderCells" mat-header-cell *matHeaderCellDef> {{tableHeaderCells[i]}} </th>
+            <td mat-cell *matCellDef="let element; let INDEX = index;">
+                <img [src]="element[column]" alt="Profile Image" *ngIf="column == 'photoURL'" width="30" height="30"
+                    class="round padding-right-10">
+                <p *ngIf="column != 'photoURL' && column != 'status'">{{element[column]}}</p>
+                <div>
+                    <mat-chip-list aria-label="Fish selection" *ngIf="column != 'photoURL' && column == 'status'">
+                        <div class="flex start_center gap-1em">
+                            <mat-chip [color]="element[column] === 'Active' ? 'primary' : 'accent'"
+                                selected>{{element[column]}}</mat-chip>
+                            <mat-icon color="accent" class="pointer" title="Edit user" (click)="edit(element)">edit</mat-icon>
+                            <mat-icon color="warn" class="pointer" title="Delete user" (click)="delete(element)">delete</mat-icon>
+                        </div>
+                    </mat-chip-list>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr class="claimRows userRows" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

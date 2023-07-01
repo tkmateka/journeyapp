@@ -1,0 +1,143 @@
+<form class="primary-light-border gap-1em flex column" [formGroup]="userForm">
+    <h2 class="text-center uploadBtn no-margin">Let's get started</h2>
+
+    <!-- row -->
+    <div class="flex center_center">
+        <div class="width-48 profile-image accent-border round" matTooltip="A clear photo of your Face">
+            <div hidden>
+                <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                    <input matInput placeholder="Upload image" readonly (click)="fileInput.click()"
+                        formControlName="photoURL" accept="image/*" #image>
+                </mat-form-field>
+                <!-- Hidden File Upload Input -->
+                <input hidden (change)="fileUpload($event)" #fileInput type="file" id="file">
+            </div>
+            <img [src]="image.value" alt="Profile image" class="round">
+            <button mat-raised-button class="full-width round" (click)="fileInput.click()" color="accent">
+                <span class="material-icons">cloud_upload</span>
+            </button>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="flex space-between_center">
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                <input matInput placeholder="First name" [required]="true" type="text" formControlName="firstName">
+                <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">
+                    First name is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                <input matInput placeholder="Last name" [required]="true" type="text" formControlName="lastName">
+                <mat-error *ngIf="userForm.get('lastName')?.hasError('required')">
+                    Last name is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- row -->
+    <div class="flex space-between_center">
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'">
+                <mat-select placeholder="Select role" [required]="true" formControlName="role">
+                    <mat-option *ngFor="let option of roles" [value]="option">{{option}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userForm.get('role')?.hasError('required')">
+                    Role is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                <input matInput #idNumber placeholder="ID number" [required]="true" maxlength="13"
+                    formControlName="idNumber" oninput="this.value=this.value.replace(/[^\d]/,'')"
+                    (focusout)="validateID(idNumber.value)" type="text">
+
+                <mat-error
+                    *ngIf="userForm.get('idNumber')?.hasError('pattern') && !userForm.get('idNumber')?.hasError('required')">
+                    ID number is invalid
+                </mat-error>
+                <mat-error *ngIf="userForm.get('idNumber')?.hasError('required')">
+                    ID number is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- row -->
+    <div class="flex space-between_center">
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'">
+                <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="dateOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'">
+                <input matInput placeholder="Gender" type="text" formControlName="gender" autocomplete="false">
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="flex space-between_center">
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                <input matInput placeholder="Phone number" [required]="true" maxlength="10" type="text"
+                    formControlName="phoneNumber" oninput="this.value=this.value.replace(/[^\d]/,'')">
+                <mat-error
+                    *ngIf="userForm.get('phoneNumber')?.hasError('pattern') && !userForm.get('phoneNumber')?.hasError('required')">
+                    Invalid phone number
+                </mat-error>
+                <mat-error *ngIf="userForm.get('phoneNumber')?.hasError('required')">
+                    Phone number is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="width-48 grey-border-input-container">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                <input matInput placeholder="example@domain.com" [required]="true" type="email" formControlName="email">
+                <mat-error
+                    *ngIf="userForm.get('email')?.hasError('pattern') && !userForm.get('email')?.hasError('required')">
+                    Invalid email address
+                </mat-error>
+                <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="flex space-between_center">
+        <div class="grey-border-input-container full-width">
+            <mat-form-field [appearance]="'outline'" [floatLabel]="'never'" [hideRequiredMarker]="false">
+                <textarea matInput placeholder="Tell us about you" [required]="true" formControlName="about"
+                    class="full-width"></textarea>
+                <mat-error
+                    *ngIf="userForm.get('about')?.hasError('minlength') && !userForm.get('about')?.hasError('required')">
+                    About should be a minimum of 6 charecters
+                </mat-error>
+                <mat-error *ngIf="userForm.get('about')?.hasError('required')">
+                    About is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- Submit area -->
+    <div class="flex center_center column">
+        <p class="font-10 text-center">By clicking "Update Profile" button, you agree to JourneyApp
+            terms of acceptable use.</p>
+        <div class="flex space-between_center full-width">
+            <button mat-raised-button color="warn" class="width-48" mat-dialog-close>
+                Cancel
+            </button>
+            <button mat-raised-button (click)="register()" color="primary" class="width-48">
+                Update Profile
+            </button>
+        </div>
+    </div>
+
+</form>

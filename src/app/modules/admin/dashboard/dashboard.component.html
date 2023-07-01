@@ -1,0 +1,18 @@
+<div class="flex center_stretch">
+    <div class="flex column width-90">
+        <!-- Stats -->
+        <div class="flex space-between_stretch gap-1em">
+            <div class="flex flex-1" *ngFor="let key of usersDetailsKeys">
+              <mat-card class="full-width">
+                <mat-card-content class="flex column start_stretch">
+                  <p class="no-margin">{{key | titlecase}} users</p>
+                  <p class="count primary">{{usersDetails[key]}}</p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+          <!-- Table -->
+          <app-table [data]="users" (getUpdatedUsers)="getAllUsers()"></app-table>
+    </div>
+    
+</div>

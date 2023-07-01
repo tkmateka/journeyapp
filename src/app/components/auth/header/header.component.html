@@ -1,0 +1,10 @@
+<!-- Don't have an account? -->
+<div class="flex center_center primary-light-bottom-border height-70px">
+    <div class="flex space-between_center width-80">
+        <div class="logo">JourneyApp</div>
+        <div class="flex start_center gap-1em">
+            <p>{{headerData[route].question}}</p>
+            <button mat-raised-button color="primary" [routerLink]="headerData[route].route">{{headerData[route].label}}</button>
+        </div>
+    </div>
+</div>

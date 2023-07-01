@@ -1,0 +1,33 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="text-center">
+        <div class="logo">JourneyApp</div>
+        <div>
+            <p [class.primary-light-bottom-border]="indx === selectedNavItem" class="side-nav-item pointer" (click)="selectedNavItem = indx"
+                *ngFor="let item of sideNavItems; let indx = index" [routerLink]="item.route">{{item.label}}</p>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="flex column full-screen">
+            <!-- Don't have an account? -->
+            <div class="flex center_center primary-light-bottom-border height-70px">
+                <div class="flex space-between_center width-90">
+                    <div class="logo" *ngIf="!opened">JourneyApp</div>
+                    <div class="logo" *ngIf="opened">{{user.role | titlecase}}</div>
+                    <div class="flex start_center gap-1em">
+                        <div class="flex start_center gap-1em">
+                            <small><b>{{user.firstName | titlecase}} {{user.lastName | titlecase}}</b></small>
+                            <img src="../../../../assets/images/male_avatar.svg" alt="male_avatar" width="40"
+                                height="40">
+                        </div>
+                        <mat-icon *ngIf="!opened" title="Open Menu">menu</mat-icon>
+                        <mat-icon title="Logout" class="pointer" color="warn" (click)="logout()">logout</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="container-height padding-top-2em">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

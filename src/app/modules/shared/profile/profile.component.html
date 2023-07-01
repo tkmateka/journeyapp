@@ -1,0 +1,49 @@
+<div class="flex center_stretch">
+  <div class="flex space-between_stretch width-90">
+    <div class="width-48 flex">
+      <mat-card class="example-card full-width">
+        <mat-card-header>
+          <mat-card-title>{{user.firstName | titlecase}} {{user.lastName | titlecase}}</mat-card-title>
+          <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="user.photoURL" alt="Profile image" height="200">
+        <mat-card-content>
+          <p>{{user.about}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="width-48 flex column gap-1em">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <h2 class="text-center">Personal Information</h2>
+
+          <div class="flex column gap-1em">
+            <div class="flex space-between_center" *ngFor="let item of personalDetails">
+              <p class="no-margin"><b>{{item.label}}:</b></p>
+              <p class="no-margin" *ngIf="item.label !== 'Date of birth' && item.label !== 'Date Joined'">{{item.value}}</p>
+              <p class="no-margin" *ngIf="item.label === 'Date of birth' || item.label === 'Date Joined'">{{item.value | date:'dd-MMM-YYYY'}}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="example-card">
+        <mat-card-content>
+          <div class="flex column gap-1em">
+            <div class="flex space-between_center">
+              <p class="no-margin"><b>Status:</b></p>
+              <mat-chip-list aria-label="Fish selection">
+                <mat-chip [color]="user.status === 'Active' ? 'primary' : 'accent'" selected>{{user.status}}</mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="edit-profile accent-border pointer" (click)="openDialog()">
+      <mat-icon color="accent" class="pointer" title="Edit profile">edit</mat-icon>
+    </div>
+  </div>
+</div>
